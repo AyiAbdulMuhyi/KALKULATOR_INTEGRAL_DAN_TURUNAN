@@ -7,7 +7,12 @@ x = sp.Symbol('x')
 
 st.title("🧮 Kalkulator Integral & Turunan (KalkulusX)")
 fungsi_input = st.text_input("Masukkan fungsi aljabar (misal: x*2 + 3*x):", "x*2 + 3*x")
-fungsi = sp.sympify(fungsi_input)
+try:
+    fungsi = sp.sympify(fungsi_input)
+except (sp.SympifyError, TypeError):
+    st.error("Fungsi tidak valid. Periksa kembali penulisannya.")
+    st.stop()
+
 
 operasi = st.radio("Pilih Operasi:", ["Turunan", "Integral"])
 
