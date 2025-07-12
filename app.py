@@ -38,4 +38,17 @@ ax.plot(x_vals, h_lambd(x_vals), label='Hasil Operasi', color='red')
 ax.legend()
 ax.grid(True)
 st.pyplot(fig)
+try:
+    y_f = f_lambd(x_vals)
+    y_h = h_lambd(x_vals)
+    
+    fig, ax = plt.subplots(figsize=(10, 5))
+    ax.plot(x_vals, y_f, label='Fungsi Asli f(x)', color='blue')
+    ax.plot(x_vals, y_h, label='Hasil Operasi', color='red')
+    ax.legend()
+    ax.grid(True)
+    st.pyplot(fig)
+except Exception as e:
+    st.error(f"Terjadi kesalahan saat menggambar grafik: {e}")
+
 
