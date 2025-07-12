@@ -7,11 +7,8 @@ x = sp.Symbol('x')
 
 st.title("🧮 Kalkulator Integral & Turunan (KalkulusX)")
 fungsi_input = st.text_input("Masukkan fungsi aljabar (misal: x*2 + 3*x):", "x*2 + 3*x")
-try:
-    fungsi = sp.sympify(fungsi_input)
-except (sp.SympifyError, TypeError):
-    st.error("Fungsi tidak valid. Periksa kembali penulisannya.")
-    st.stop()
+fungsi = sp.sympify(fungsi_input)
+
 
 
 operasi = st.radio("Pilih Operasi:", ["Turunan", "Integral"])
@@ -35,9 +32,10 @@ x_vals = np.linspace(-10, 10, 400)
 f_lambd = sp.lambdify(x, fungsi, modules=["numpy"])
 h_lambd = sp.lambdify(x, hasil, modules=["numpy"])
 
-plt.figure(figsize=(10,5))
-plt.plot(x_vals, f_lambd(x_vals), label='Fungsi Asli f(x)', color='blue')
-plt.plot(x_vals, h_lambd(x_vals), label='Hasil Operasi', color='red')
-plt.legend()
-plt.grid(True)
-st.pyplot(plt)
+fig, ax = plt.subplots(figsize=(10, 5))
+ax.plot(x_vals, f_lambd(x_vals), label='Fungsi Asli f(x)', color='blue')
+ax.plot(x_vals, h_lambd(x_vals), label='Hasil Operasi', color='red')
+ax.legend()
+ax.grid(True)
+st.pyplot(fig)
+
